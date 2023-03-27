@@ -9,12 +9,16 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name = "CapacitorPowerManager")
 public class CapacitorPowerManagerPlugin extends Plugin {
 
-    private CapacitorPowerManager implementation = new CapacitorPowerManager();
+    private CapacitorPowerManager implementation;
+
+    @Override
+    public void load() {
+        implementation = new CapacitorPowerManager(getContext());
+    }
 
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
-
+    public void isExemptFromLowPowerStandby(PluginCall call) {
+        bool value = this.implementation.isExemptFromLowPowerStandby();
         JSObject ret = new JSObject();
         ret.put("value", implementation.echo(value));
         call.resolve(ret);
