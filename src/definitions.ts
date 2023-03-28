@@ -1,5 +1,5 @@
 export interface CapacitorPowerManagerPlugin {
-  isExemptFromLowPowerStandby() : LowPowerResponse
+  isIgnoringBatteryOptimizations(feature: string): Promise<LowPowerResponse>
 }
 
 export interface LowPowerResponse {

@@ -5,6 +5,7 @@ import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+import com.capacitor.community.powermanager.CapacitorPowerManager;
 
 @CapacitorPlugin(name = "CapacitorPowerManager")
 public class CapacitorPowerManagerPlugin extends Plugin {
@@ -13,14 +14,16 @@ public class CapacitorPowerManagerPlugin extends Plugin {
 
     @Override
     public void load() {
-        implementation = new CapacitorPowerManager(getContext());
+        this.implementation = new CapacitorPowerManager(getContext());
     }
 
     @PluginMethod
-    public void isExemptFromLowPowerStandby(PluginCall call) {
-        bool value = this.implementation.isExemptFromLowPowerStandby();
+    public void isIgnoringBatteryOptimizations(PluginCall call) {
+        String feature = call.getString("feature");
+        Boolean value = this.implementation.isIgnoringBatteryOptimizations(feature);
+
         JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
+        ret.put("value", value);
         call.resolve(ret);
     }
 }

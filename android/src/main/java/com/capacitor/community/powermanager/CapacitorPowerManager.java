@@ -1,3 +1,4 @@
+package com.capacitor.community.powermanager;
 
 import android.content.Context;
 import android.os.PowerManager;
@@ -12,8 +13,8 @@ public class CapacitorPowerManager {
         this.pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
     }
 
-    public String isExemptFromLowPowerStandby() {
-        bool value = pm.isExemptFromLowPowerStandby();
+    public Boolean isIgnoringBatteryOptimizations(String feature) {
+        Boolean value = this.pm.isIgnoringBatteryOptimizations(feature);
         return value;
     }
 }
